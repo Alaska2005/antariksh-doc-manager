@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: antariksh-doc-manager
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: EVENTS_DIR
+        value: /opt/render/project/src/storage/Events
+    disk:
+      name: antariksh-event-storage
+      mountPath: /opt/render/project/src/storage
+      sizeGB: 1

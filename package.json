@@ -1,0 +1,16 @@
+{
+  "name": "antariksh-doc-manager",
+  "version": "1.0.0",
+  "description": "Local document manager for Antariksh Club event files.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "documents",
+    "events",
+    "antariksh"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Antariksh Doc Manager</title>
+    <meta name="theme-color" content="#070a12">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Antariksh Docs">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div id="install-banner" class="install-banner" hidden>
+      <span>Install Antariksh Docs on this device</span>
+      <button id="install-app" class="primary-button" type="button">Install</button>
+    </div>
+
+    <main class="app-shell">
+      <section class="workspace">
+        <aside class="sidebar">
+          <div>
+            <p class="eyebrow">Antariksh Club</p>
+            <h1>Mission Archive</h1>
+          </div>
+
+          <div class="folder-preview" aria-label="Folder structure preview">
+            <div class="folder-row root">Events</div>
+            <div class="folder-row branch">YYYY-MM-DD_event-name</div>
+            <div class="folder-row leaf">Attendance</div>
+            <div class="folder-row leaf">Report</div>
+            <div class="folder-row leaf">Photos</div>
+          </div>
+        </aside>
+
+        <section class="panel" aria-labelledby="upload-title">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">New mission</p>
+              <h2 id="upload-title">Catalog event files</h2>
+            </div>
+            <span class="status-pill" id="event-count">No events yet</span>
+          </div>
+
+          <form id="event-form" class="upload-form">
+            <div class="field-grid">
+              <label>
+                <span>Event name</span>
+                <input name="eventName" type="text" placeholder="e.g. Stargazing Night" required>
+              </label>
+
+              <label>
+                <span>Event date</span>
+                <input name="eventDate" type="date" required>
+              </label>
+            </div>
+
+            <div class="upload-grid">
+              <label class="drop-zone">
+                <span class="file-type">Report</span>
+                <strong>Choose report</strong>
+                <small>PDF, DOCX, or any report file</small>
+                <input name="report" type="file" required>
+                <output data-file-label="report">No file selected</output>
+              </label>
+
+              <label class="drop-zone">
+                <span class="file-type">Attendance</span>
+                <strong>Choose attendance sheet</strong>
+                <small>XLSX, CSV, PDF, or image</small>
+                <input name="attendance" type="file" required>
+                <output data-file-label="attendance">No file selected</output>
+              </label>
+
+              <label class="drop-zone">
+                <span class="file-type">Photos</span>
+                <strong>Choose event photos</strong>
+                <small>Multiple images allowed</small>
+                <input name="photos" type="file" accept="image/*" multiple required>
+                <output data-file-label="photos">No files selected</output>
+              </label>
+            </div>
+
+            <div class="actions">
+              <button type="reset" class="secondary-button">Clear</button>
+              <button type="submit" class="primary-button">
+                <span class="button-icon" aria-hidden="true"></span>
+                Save event
+              </button>
+            </div>
+
+            <p class="form-message" id="form-message" role="status"></p>
+          </form>
+        </section>
+      </section>
+
+      <section class="events-section" aria-labelledby="events-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Archive bay</p>
+            <h2 id="events-title">Saved missions</h2>
+          </div>
+          <div class="library-tools">
+            <label class="search-field">
+              <span>Search archive</span>
+              <input id="event-search" type="search" placeholder="Search by date or event name">
+            </label>
+            <button id="refresh-events" class="secondary-button" type="button">Refresh</button>
+          </div>
+        </div>
+        <div id="events-list" class="events-list"></div>
+      </section>
+
+      <section id="event-detail" class="event-detail" aria-live="polite"></section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
