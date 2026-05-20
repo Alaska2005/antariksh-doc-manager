@@ -1,8 +1,8 @@
 # Antariksh Docs Deployment
 
-This app is a Node.js web service and PWA. For free deployment, use Koyeb for the app and Supabase for the database and uploaded files.
+This app is a Node.js web service and PWA. For production deployment, use Render for the app and Supabase for the database and uploaded files.
 
-## Recommended Free Stack: Koyeb + Supabase
+## Recommended Stack: Render + Supabase
 
 ### 1. Create Supabase project
 
@@ -14,24 +14,24 @@ This app is a Node.js web service and PWA. For free deployment, use Koyeb for th
    - Project URL
    - service_role key
 
-Keep the service role key private. It belongs only in Koyeb environment variables.
+Keep the service role key private. It belongs only in Render environment variables.
 
-### 2. Deploy app on Koyeb
+### 2. Deploy app on Render
 
 1. Push this repo to GitHub.
-2. In Koyeb, create a new Web Service from GitHub.
+2. In Render, create a new Blueprint or Web Service from GitHub.
 3. Select this repository.
 4. Use:
    - Build command: `npm install`
    - Run command: `npm start`
    - Port: `3000`
-5. Add environment variables:
+5. Add environment variables in Render:
    - `SUPABASE_URL=your_supabase_project_url`
    - `SUPABASE_SERVICE_ROLE_KEY=your_service_role_key`
    - `SUPABASE_BUCKET=event-files`
 6. Deploy.
 
-Koyeb gives you an HTTPS URL. Open that URL on mobile and use Add to Home Screen.
+Render gives you an HTTPS URL. Open that URL on mobile and use Add to Home Screen.
 
 ## How Storage Works
 

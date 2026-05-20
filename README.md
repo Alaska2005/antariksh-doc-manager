@@ -97,7 +97,7 @@ This app needs persistent file storage. Free platforms that reset the filesystem
 
 Recommended deployment patterns:
 
-- Node host + Supabase database/storage
+- Render Node web service + Supabase database/storage
 - Static frontend + direct Supabase client upload, if the backend is rewritten for public `anon` key and strict Row Level Security
 - VPS or always-free VM for full server control
 
