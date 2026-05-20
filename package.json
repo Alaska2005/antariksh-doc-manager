@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Local document manager for Antariksh Club event files.",
   "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node server.js"
   },

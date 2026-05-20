@@ -1,26 +1,56 @@
 # Antariksh Docs Deployment
 
-This app is a Node.js web service and PWA. It needs persistent storage because uploaded reports, attendance sheets, and photos are saved to disk.
+This app is a Node.js web service and PWA. For free deployment, use Koyeb for the app and Supabase for the database and uploaded files.
 
-## Recommended: Render
+## Recommended Free Stack: Koyeb + Supabase
 
-1. Push this project to GitHub.
-2. In Render, create a new Blueprint or Web Service from the GitHub repo.
-3. Use these settings if creating manually:
+### 1. Create Supabase project
+
+1. Go to Supabase and create a new project.
+2. Open SQL Editor.
+3. Run the contents of `supabase-schema.sql`.
+4. Open Project Settings > API.
+5. Copy:
+   - Project URL
+   - service_role key
+
+Keep the service role key private. It belongs only in Koyeb environment variables.
+
+### 2. Deploy app on Koyeb
+
+1. Push this repo to GitHub.
+2. In Koyeb, create a new Web Service from GitHub.
+3. Select this repository.
+4. Use:
    - Build command: `npm install`
-   - Start command: `npm start`
-   - Environment variable: `EVENTS_DIR=/opt/render/project/src/storage/Events`
-4. Add a persistent disk:
-   - Name: `antariksh-event-storage`
-   - Mount path: `/opt/render/project/src/storage`
-   - Size: `1 GB` or larger
-5. Deploy.
+   - Run command: `npm start`
+   - Port: `3000`
+5. Add environment variables:
+   - `SUPABASE_URL=your_supabase_project_url`
+   - `SUPABASE_SERVICE_ROLE_KEY=your_service_role_key`
+   - `SUPABASE_BUCKET=event-files`
+6. Deploy.
 
-After deployment, users can open the HTTPS URL in Chrome or Safari and use Add to Home Screen.
+Koyeb gives you an HTTPS URL. Open that URL on mobile and use Add to Home Screen.
 
-## Important
+## How Storage Works
 
-Do not rely on the default server filesystem for uploads in production. Use the persistent disk path from `EVENTS_DIR`; otherwise uploaded files can disappear during redeploys or host restarts.
+Local development without Supabase env vars still saves files inside `Events/`.
+
+Production with Supabase env vars saves:
+
+```text
+Supabase Postgres:
+events
+event_files
+
+Supabase Storage:
+event-files/
+  YYYY-MM-DD_event-name/
+    Report/
+    Attendance/
+    Photos/
+```
 
 ## Local Run
 
@@ -33,4 +63,20 @@ Open:
 
 ```text
 http://localhost:3000
+```
+
+## Local Supabase Test
+
+Create a `.env` file or set these variables in your shell:
+
+```text
+SUPABASE_URL=...
+SUPABASE_SERVICE_ROLE_KEY=...
+SUPABASE_BUCKET=event-files
+```
+
+Then run:
+
+```bash
+npm start
 ```
